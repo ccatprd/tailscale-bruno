@@ -10,12 +10,6 @@ http:
     type: bearer
     token: "{{access_token}}"
   params:
-    - name: start
-      value: "{{log_start}}"
-      enabled: true
-    - name: end
-      value: "{{log_end}}"
-      enabled: true
     - name: actor
       value: ""
       enabled: false
@@ -30,8 +24,8 @@ runtime:
         // Default window: last 30 minutes
         const now = new Date();
         const start = new Date(now.getTime() - 30 * 60 * 1000);
-        bru.setEnvVar("log_end", now.toISOString());
-        bru.setEnvVar("log_start", start.toISOString());
+        const url = bru.getEnvVar("base_url") + "/tailnet/" + bru.getEnvVar("tailnet") + "/logging/configuration?start=" + encodeURIComponent(start.toISOString()) + "&end=" + encodeURIComponent(now.toISOString());
+        req.setUrl(url);
 
 settings:
   encodeUrl: true
