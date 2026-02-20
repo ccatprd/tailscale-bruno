@@ -6,9 +6,6 @@ info:
 http:
   method: POST
   url: "{{base_url}}/device/{{device_id}}/attributes/{{attribute_key}}"
-  auth:
-    type: bearer
-    token: "{{access_token}}"
   headers:
     - name: Content-Type
       value: application/json
@@ -19,18 +16,30 @@ http:
         "value": "compliant",
         "expiry": "2026-12-31T00:00:00Z"
       }
+  auth:
+    type: bearer
+    token: "{{access_token}}"
 
-docs: |
-  Sets a custom posture attribute on the device.
-
-  value: string, number, or boolean
-  expiry: ISO 8601 UTC timestamp — Tailscale removes the attribute automatically at this time.
-    Omit expiry entirely to make the attribute permanent.
-
-  To delete immediately instead of waiting for expiry, use: Delete Device Posture Attribute
+runtime:
+  variables:
+    - name: attribute_key
+      value: custom:complianceStatus
 
 settings:
   encodeUrl: true
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  Sets a custom posture attribute on the device.
+
+  attribute_key format: custom:<name> where <name> is alphanumeric/camelCase only — NO hyphens or underscores.
+    Valid:   custom:complianceStatus, custom:owner, custom:patchLevel
+    Invalid: custom:compliance-status, custom:patch_level
+
+  value: string, number, or boolean
+  expiry: ISO 8601 UTC timestamp — Tailscale removes the attribute automatically at this time.
+    Omit expiry entirely to make the attribute permanent.
+
+  To delete immediately instead of waiting for expiry, use: Delete Device Posture Attribute
