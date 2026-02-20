@@ -17,7 +17,7 @@ runtime:
         // Default window: last 5 minutes
         const now = new Date();
         const start = new Date(now.getTime() - 5 * 60 * 1000);
-        const url = bru.getEnvVar("base_url") + "/tailnet/" + bru.getEnvVar("tailnet") + "/logging/network?start=" + encodeURIComponent(start.toISOString()) + "&end=" + encodeURIComponent(now.toISOString());
+        const url = bru.getEnvVar("base_url") + "/tailnet/" + bru.getEnvVar("tailnet") + "/logging/network?start=" + start.toISOString() + "&end=" + now.toISOString();
         req.setUrl(url);
 
 settings:
