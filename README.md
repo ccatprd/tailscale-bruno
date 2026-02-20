@@ -8,19 +8,30 @@ A [Bruno](https://usebruno.com) collection covering the full Tailscale REST API 
 
 - [Bruno](https://usebruno.com) desktop app (free, open source)
 - A Tailscale account with admin access
-- A Tailscale API access token (see Step 1 below)
+- A Tailscale API access token **or** OAuth client credentials (see Step 1 below)
 
 ---
 
 ## Setup
 
-### Step 1 — Get a Tailscale API token
+### Step 1 — Get credentials
+
+**Option A: API access token (simplest)**
 
 1. Go to [https://login.tailscale.com/admin/settings/keys](https://login.tailscale.com/admin/settings/keys)
 2. Click **Generate access token**
-3. Give it a name and copy the token — you won't see it again
+3. Copy the token (starts with `tskey-api-...`) — you won't see it again
+4. Put it in the `access_token` environment variable
 
-> Your token starts with `tskey-api-...`
+**Option B: OAuth client (recommended for automation)**
+
+1. Go to [https://login.tailscale.com/admin/settings/oauth](https://login.tailscale.com/admin/settings/oauth)
+2. Click **Generate OAuth client**
+3. Copy the client ID and client secret (starts with `tskey-client-...`)
+4. Put them in `oauth_client_id` and `oauth_client_secret` in your environment
+5. Run **OAuth → Get OAuth Token** — it will automatically set `access_token` for you
+
+> OAuth tokens expire after 1 hour. Re-run **Get OAuth Token** to refresh.
 
 ---
 
@@ -58,11 +69,12 @@ The collection uses environment variables so your credentials and IDs are stored
 
 1. In Bruno, click the **shield icon** in the top-right corner
 2. Click **Import**
-3. Select the file `environments/Tailscale.example.json` from the collection folder
+3. Select the file `environments/Tailscale.example.yml` from the collection folder
 4. The **Tailscale** environment will appear — click it to open it
 5. Fill in your values:
    - `tailnet` → your tailnet name, e.g. `example.ts.net`
-   - `access_token` → the token you generated in Step 1
+   - `access_token` → your API token (Option A), or leave blank and use OAuth (Option B)
+   - `oauth_client_id` and `oauth_client_secret` → if using OAuth (Option B)
 6. Click **Save**
 7. Select **Tailscale** from the environment dropdown in the top-right corner
 
@@ -178,7 +190,9 @@ Posture attributes are custom key-value pairs you can attach to devices — usef
 |---|---|---|
 | `base_url` | Tailscale API base URL (pre-filled) | `https://api.tailscale.com/api/v2` |
 | `tailnet` | Your tailnet name | `example.ts.net` |
-| `access_token` | Your API access token | `tskey-api-...` |
+| `access_token` | Bearer token for all requests — set directly or auto-set by Get OAuth Token | `tskey-api-...` |
+| `oauth_client_id` | OAuth client ID for token exchange | `k6MuYzEDs...` |
+| `oauth_client_secret` | OAuth client secret for token exchange | `tskey-client-...` |
 | `device_id` | Device ID — auto-set by List Devices, or set manually | `123456789` |
 | `attribute_key` | Posture attribute key (must start with `custom:`) | `custom:compliance-status` |
 | `user_id` | User ID for user-specific calls | |
