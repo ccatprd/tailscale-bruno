@@ -1,0 +1,34 @@
+info:
+  name: Create Auth Key
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}/tailnet/{{tailnet}}/keys"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  body:
+    type: json
+    data: |
+      {
+        "capabilities": {
+          "devices": {
+            "create": {
+              "reusable": false,
+              "ephemeral": false,
+              "preauthorized": false,
+              "tags": []
+            }
+          }
+        },
+        "expirySeconds": 86400,
+        "description": "Created via API"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

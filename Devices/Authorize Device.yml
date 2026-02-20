@@ -1,0 +1,23 @@
+info:
+  name: Authorize Device
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{base_url}}/device/{{device_id}}/authorized"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  body:
+    type: json
+    data: |
+      {
+        "authorized": true
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -1,0 +1,30 @@
+info:
+  name: List Configuration Audit Logs
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}/tailnet/{{tailnet}}/logging/configuration"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  params:
+    - name: start
+      value: ""
+      enabled: false
+    - name: end
+      value: ""
+      enabled: false
+    - name: actor
+      value: ""
+      enabled: false
+    - name: event
+      value: ""
+      enabled: false
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

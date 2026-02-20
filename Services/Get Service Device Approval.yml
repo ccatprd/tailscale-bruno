@@ -1,0 +1,17 @@
+info:
+  name: Get Service Device Approval
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{base_url}}/tailnet/{{tailnet}}/services/{{service_name}}/device/{{device_id}}/approved"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

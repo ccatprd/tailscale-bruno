@@ -1,0 +1,20 @@
+info:
+  name: Get Policy File
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}/tailnet/{{tailnet}}/acl"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Accept
+      value: application/json
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
