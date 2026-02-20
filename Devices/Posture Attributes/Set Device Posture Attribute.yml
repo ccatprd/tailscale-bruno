@@ -34,9 +34,9 @@ settings:
 docs: |
   Sets a custom posture attribute on the device.
 
-  attribute_key format: custom:<name> where <name> is alphanumeric/camelCase only — NO hyphens or underscores.
-    Valid:   custom:complianceStatus, custom:owner, custom:patchLevel
-    Invalid: custom:compliance-status, custom:patch_level
+  attribute_key format: custom:<name> — letters, numbers, underscores only. NO hyphens.
+    Valid:   custom:compliance_status, custom:owner, custom:patch_level
+    Invalid: custom:compliance-status
 
   value: string, number, or boolean
   expiry: ISO 8601 UTC timestamp — Tailscale removes the attribute automatically at this time.
