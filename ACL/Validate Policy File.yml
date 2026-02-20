@@ -16,11 +16,22 @@ http:
     type: json
     data: |
       {
+        "hosts": {
+          "host1": "100.117.222.1",
+          "host2": "100.117.222.2"
+        },
         "acls": [
           {
             "action": "accept",
-            "src": ["*"],
-            "dst": ["*:*"]
+            "src": ["host1"],
+            "dst": ["host2:22"]
+          }
+        ],
+        "tests": [
+          {
+            "src": "host1",
+            "accept": ["host2:22"],
+            "deny": ["host2:443"]
           }
         ]
       }
@@ -30,3 +41,16 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  Validates a proposed ACL and optionally runs connectivity tests against it.
+
+  The "tests" array lets you assert expected behavior BEFORE applying the ACL:
+    - "accept": list of host:port pairs that SHOULD be allowed
+    - "deny":   list of host:port pairs that SHOULD be blocked
+
+  SUCCESS: returns {} (empty object) — ACL is valid and all tests passed.
+  FAILURE: returns { "message": "test(s) failed", "data": [...] } with per-host errors.
+
+  The body is a proposed ACL — it is NOT applied to your tailnet.
+  Use Update Policy File to apply changes.
