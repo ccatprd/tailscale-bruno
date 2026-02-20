@@ -10,6 +10,25 @@ http:
     type: bearer
     token: "{{access_token}}"
 
+runtime:
+  scripts:
+    - type: after-response
+      code: |
+        const body = res.getBody();
+        const custom = body && body.attributes;
+        if (custom) {
+          // Find the first key that starts with "custom:"
+          const keys = Object.keys(custom).filter(function(k) { return k.startsWith("custom:"); });
+          if (keys.length > 0) {
+            bru.setEnvVar("attribute_key", keys[0]);
+            console.log("attribute_key set to: " + keys[0] + " (value: " + JSON.stringify(custom[keys[0]]) + ")");
+          } else {
+            console.log("No custom: attributes found on this device. Set attribute_key manually in the environment.");
+          }
+        } else {
+          console.log("No attributes in response. Body: " + JSON.stringify(body));
+        }
+
 settings:
   encodeUrl: true
   timeout: 0
