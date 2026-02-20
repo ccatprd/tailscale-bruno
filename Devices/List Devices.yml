@@ -12,15 +12,16 @@ http:
 
 runtime:
   scripts:
-    post-response: |
-      // Grabs the first device ID from the response and stores it
-      // as the device_id environment variable for use in subsequent calls.
-      // To target a different device, just overwrite device_id in the environment.
-      const devices = res.getBody()?.devices;
-      if (devices && devices.length > 0) {
-        bru.setEnvVar("device_id", devices[0].id);
-        console.log("device_id set to:", devices[0].id, "(", devices[0].name, ")");
-      }
+    - type: after-response
+      code: |
+        const body = res.getBody();
+        const devices = body && body.devices;
+        if (devices && devices.length > 0) {
+          bru.setEnvVar("device_id", devices[0].id);
+          console.log("device_id set to: " + devices[0].id + " (" + devices[0].name + ")");
+        } else {
+          console.log("No devices found in response. Body: " + JSON.stringify(body));
+        }
 
 settings:
   encodeUrl: true
