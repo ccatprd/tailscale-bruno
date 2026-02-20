@@ -11,11 +11,21 @@ http:
     token: "{{access_token}}"
   params:
     - name: start
-      value: ""
-      enabled: false
+      value: "{{log_start}}"
+      enabled: true
     - name: end
-      value: ""
-      enabled: false
+      value: "{{log_end}}"
+      enabled: true
+
+runtime:
+  scripts:
+    - type: before-request
+      code: |
+        // Default window: last 5 minutes
+        const now = new Date();
+        const start = new Date(now.getTime() - 5 * 60 * 1000);
+        bru.setVar("log_end", now.toISOString());
+        bru.setVar("log_start", start.toISOString());
 
 settings:
   encodeUrl: true
