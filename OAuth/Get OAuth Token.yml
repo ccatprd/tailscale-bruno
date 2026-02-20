@@ -10,7 +10,7 @@ http:
     - name: Content-Type
       value: application/x-www-form-urlencoded
   body:
-    type: formUrlEncoded
+    type: form-urlencoded
     data:
       - name: client_id
         value: "{{oauth_client_id}}"
