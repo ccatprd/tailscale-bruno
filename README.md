@@ -122,23 +122,23 @@ Posture attributes are custom key-value pairs you can attach to devices — usef
 
 1. In the sidebar, expand **Devices → Posture Attributes**
 2. Click **Set Device Posture Attribute**
-3. Before sending, set `attribute_key` in your environment (shield icon) to your attribute name. Custom attributes must be prefixed with `custom:`, e.g.:
-   - `custom:compliance-status`
+3. Before sending, set `attribute_key` in your environment (shield icon) to your attribute name. Custom attributes must be prefixed with `custom:`, followed by letters, numbers, or underscores — **no hyphens**. e.g.:
+   - `custom:compliance_status`
    - `custom:owner`
-   - `custom:environment`
+   - `custom:patch_level`
 4. Edit the request body to set your value:
 
 ```json
 {
   "value": "compliant",
-  "expiry": "2025-12-31T00:00:00Z"
+  "expiry": "2026-12-31T00:00:00Z"
 }
 ```
 
 > `expiry` is optional — remove it if you want the attribute to persist indefinitely.
 
 5. Click **Send**
-6. A `200 OK` with an empty body means it worked
+6. **The response will be `null` — this means success.** Tailscale returns an empty body on 200 OK for this endpoint. It is not an error.
 
 ---
 

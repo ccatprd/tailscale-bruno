@@ -23,7 +23,7 @@ http:
 runtime:
   variables:
     - name: attribute_key
-      value: custom:complianceStatus
+      value: custom:compliance_Status
 
 settings:
   encodeUrl: true
@@ -41,5 +41,8 @@ docs: |
   value: string, number, or boolean
   expiry: ISO 8601 UTC timestamp — Tailscale removes the attribute automatically at this time.
     Omit expiry entirely to make the attribute permanent.
+
+  SUCCESS RESPONSE: Tailscale returns null (empty body) with 200 OK on success. This is correct — it does NOT mean failure.
+  To verify the attribute was set, run Get Device Attributes.
 
   To delete immediately instead of waiting for expiry, use: Delete Device Posture Attribute
