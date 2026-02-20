@@ -1,0 +1,26 @@
+info:
+  name: Update Posture Integration
+  type: http
+  seq: 4
+
+http:
+  method: PATCH
+  url: "{{base_url}}/posture/integrations/{{integration_id}}"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "clientSecret": "new-client-secret"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

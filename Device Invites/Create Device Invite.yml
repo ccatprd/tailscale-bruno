@@ -1,0 +1,35 @@
+info:
+  name: Create Device Invite
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}/device/{{device_id}}/device-invites"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      [
+        {
+          "multiUse": false,
+          "allowExitNode": false,
+          "email": "recipient@example.com"
+        }
+      ]
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  email is optional — omit to generate a shareable link without a specific recipient.
+  multiUse: true allows the invite to be used more than once.
+  allowExitNode: true lets the recipient use this device as an exit node.

@@ -1,0 +1,29 @@
+info:
+  name: Update Contact Preference
+  type: http
+  seq: 2
+
+http:
+  method: PATCH
+  url: "{{base_url}}/tailnet/{{tailnet}}/contacts/{{contact_type}}"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "email": "security@example.com"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  contact_type must be one of: account, support, security

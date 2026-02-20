@@ -65,6 +65,31 @@
       "name": "attribute_key",
       "value": "",
       "enabled": true
+    },
+    {
+      "name": "oauth_client_id",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "name": "oauth_client_secret",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "name": "contact_type",
+      "value": "security",
+      "enabled": true
+    },
+    {
+      "name": "preview_for",
+      "value": "",
+      "enabled": true
+    },
+    {
+      "name": "aws_external_id",
+      "value": "",
+      "enabled": true
     }
   ]
 }

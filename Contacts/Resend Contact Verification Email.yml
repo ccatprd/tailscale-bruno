@@ -1,0 +1,20 @@
+info:
+  name: Resend Contact Verification Email
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}/tailnet/{{tailnet}}/contacts/{{contact_type}}/resend-verification-email"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  contact_type must be one of: account, support, security

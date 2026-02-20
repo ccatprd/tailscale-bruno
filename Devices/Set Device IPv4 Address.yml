@@ -1,0 +1,26 @@
+info:
+  name: Set Device IPv4 Address
+  type: http
+  seq: 13
+
+http:
+  method: POST
+  url: "{{base_url}}/device/{{device_id}}/ip"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "ipv4": "100.64.0.1"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

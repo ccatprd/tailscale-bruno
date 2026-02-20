@@ -1,0 +1,27 @@
+info:
+  name: Create or Update Service
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{base_url}}/tailnet/{{tailnet}}/services/{{service_name}}"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "description": "My service description",
+        "ports": ["tcp:443", "tcp:80"]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

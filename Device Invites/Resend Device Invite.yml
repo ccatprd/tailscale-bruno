@@ -1,0 +1,17 @@
+info:
+  name: Resend Device Invite
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{base_url}}/device-invites/{{device_invite_id}}/resend"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -13,10 +13,10 @@ http:
 runtime:
   scripts:
     - type: before-request
-      code: |
-        // Default window: last 5 minutes
+      code: |-
+        // Default window: fetch 1 minute of logs from now
         const now = new Date();
-        const start = new Date(now.getTime() - 5 * 60 * 1000);
+        const start = new Date(now.getTime() - 1 * 60 * 1000);
         const url = bru.getEnvVar("base_url") + "/tailnet/" + bru.getEnvVar("tailnet") + "/logging/network?start=" + start.toISOString() + "&end=" + now.toISOString();
         req.setUrl(url);
 

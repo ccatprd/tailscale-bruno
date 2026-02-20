@@ -1,0 +1,31 @@
+info:
+  name: Update Split DNS
+  type: http
+  seq: 9
+
+http:
+  method: PATCH
+  url: "{{base_url}}/tailnet/{{tailnet}}/dns/split-dns"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "example.com": ["1.2.3.4"],
+        "corp.internal": ["10.0.0.1"]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  PATCH merges changes into existing split DNS config.
+  Use Replace Split DNS (PUT) to overwrite the entire config.

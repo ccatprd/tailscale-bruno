@@ -1,0 +1,37 @@
+info:
+  name: Update Auth Key
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{base_url}}/tailnet/{{tailnet}}/keys/{{key_id}}"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "capabilities": {
+          "devices": {
+            "create": {
+              "reusable": true,
+              "ephemeral": false,
+              "preauthorized": false,
+              "tags": []
+            }
+          }
+        },
+        "expirySeconds": 86400,
+        "description": "Updated via API"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

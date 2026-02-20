@@ -1,0 +1,30 @@
+info:
+  name: Update Device Key
+  type: http
+  seq: 12
+
+http:
+  method: POST
+  url: "{{base_url}}/device/{{device_id}}/key"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "keyExpiryDisabled": true
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  Set keyExpiryDisabled to true to disable key expiry for this device.
+  Set to false to re-enable key expiry.

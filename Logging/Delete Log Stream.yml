@@ -1,0 +1,20 @@
+info:
+  name: Delete Log Stream
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: "{{base_url}}/tailnet/{{tailnet}}/logging/{{log_type}}/stream"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  log_type must be either "configuration" or "network"

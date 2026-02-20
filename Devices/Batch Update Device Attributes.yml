@@ -1,0 +1,36 @@
+info:
+  name: Batch Update Device Attributes
+  type: http
+  seq: 10
+
+http:
+  method: PATCH
+  url: "{{base_url}}/tailnet/{{tailnet}}/device-attributes"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "devices": [
+          {
+            "id": "device-id-here",
+            "attributes": {
+              "custom:compliance_status": {
+                "value": "compliant",
+                "expiry": "2026-12-31T00:00:00Z"
+              }
+            }
+          }
+        ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

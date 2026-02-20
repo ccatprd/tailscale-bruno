@@ -1,0 +1,26 @@
+info:
+  name: Set DNS Preferences
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{base_url}}/tailnet/{{tailnet}}/dns/preferences"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "magicDNS": true
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

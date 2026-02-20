@@ -1,0 +1,32 @@
+info:
+  name: Update Log Stream
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{base_url}}/tailnet/{{tailnet}}/logging/{{log_type}}/stream"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "destinationType": "s3",
+        "url": "https://s3.amazonaws.com/your-bucket",
+        "user": "",
+        "token": ""
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  log_type must be either "configuration" or "network"

@@ -1,0 +1,48 @@
+info:
+  name: Get OAuth Token
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: https://api.tailscale.com/api/v2/oauth/token
+  headers:
+    - name: Content-Type
+      value: application/x-www-form-urlencoded
+  body:
+    type: formUrlEncoded
+    data:
+      - name: client_id
+        value: "{{oauth_client_id}}"
+        enabled: true
+      - name: client_secret
+        value: "{{oauth_client_secret}}"
+        enabled: true
+      - name: grant_type
+        value: client_credentials
+        enabled: true
+      - name: scope
+        value: "devices:core:read"
+        enabled: true
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  Exchanges OAuth client credentials for a short-lived access token.
+
+  Set oauth_client_id and oauth_client_secret in your environment first.
+  Create OAuth clients at: https://login.tailscale.com/admin/settings/oauth
+
+  Common scopes:
+    devices:core:read, devices:core, users:read, users,
+    keys:read, keys, dns:read, dns, acl:read, acl,
+    logs:read, logs:network:read, webhooks, tailnet:read
+
+  The returned access_token can be used as the Bearer token in all other requests.
+  Tokens are short-lived — re-run this request to get a fresh one.
+
+  SUCCESS RESPONSE: returns { "access_token": "...", "token_type": "Bearer", "expires_in": 3600 }

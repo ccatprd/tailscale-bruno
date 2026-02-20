@@ -1,0 +1,26 @@
+info:
+  name: Update Service Device Approval
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: "{{base_url}}/tailnet/{{tailnet}}/services/{{service_name}}/device/{{device_id}}/approved"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "approved": true
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

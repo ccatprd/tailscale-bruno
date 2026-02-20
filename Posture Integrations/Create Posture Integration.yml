@@ -1,0 +1,32 @@
+info:
+  name: Create Posture Integration
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}/tailnet/{{tailnet}}/posture/integrations"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "provider": "falcon",
+        "clientId": "your-client-id",
+        "clientSecret": "your-client-secret",
+        "tenantId": "your-tenant-id"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  Supported providers: falcon, intune, jamfpro, kandji, sentinelone, tanium

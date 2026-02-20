@@ -1,0 +1,31 @@
+info:
+  name: Set DNS Configuration
+  type: http
+  seq: 11
+
+http:
+  method: POST
+  url: "{{base_url}}/tailnet/{{tailnet}}/dns/configuration"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "nameservers": ["8.8.8.8"],
+        "magicDNS": true,
+        "searchPaths": ["example.com"],
+        "splitDns": {
+          "corp.internal": ["10.0.0.1"]
+        }
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

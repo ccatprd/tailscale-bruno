@@ -1,0 +1,21 @@
+info:
+  name: Test Webhook
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: "{{base_url}}/webhooks/{{endpoint_id}}/test"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+
+docs: |
+  Sends a test event to the webhook endpoint to verify it's working.
+  SUCCESS RESPONSE: null (200 OK)
