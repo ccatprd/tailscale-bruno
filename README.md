@@ -2,6 +2,8 @@
 
 A [Bruno](https://usebruno.com) collection covering the full Tailscale REST API v2 — read and write endpoints across every resource type.
 
+![tailscale-bruno screenshot](docs/screenshot.png)
+
 ---
 
 ## Requirements
