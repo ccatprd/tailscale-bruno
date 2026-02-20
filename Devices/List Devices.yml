@@ -10,6 +10,18 @@ http:
     type: bearer
     token: "{{access_token}}"
 
+runtime:
+  scripts:
+    post-response: |
+      // Grabs the first device ID from the response and stores it
+      // as the device_id environment variable for use in subsequent calls.
+      // To target a different device, just overwrite device_id in the environment.
+      const devices = res.getBody()?.devices;
+      if (devices && devices.length > 0) {
+        bru.setEnvVar("device_id", devices[0].id);
+        console.log("device_id set to:", devices[0].id, "(", devices[0].name, ")");
+      }
+
 settings:
   encodeUrl: true
   timeout: 0
