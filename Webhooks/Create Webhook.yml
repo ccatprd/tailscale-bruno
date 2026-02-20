@@ -32,3 +32,23 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Create Webhook
+
+  Registers a webhook endpoint to receive event notifications from Tailscale.
+
+  ## providerType
+
+  Controls the payload format. Use `slack` for Slack-compatible JSON, `mattermost`, `googlechat`,
+  `discord`, or `custom` for a generic JSON payload.
+
+  ## subscriptions
+
+  Available event types: `nodeCreated`, `nodeApproved`, `nodeNeedsApproval`, `nodeKeyExpiringInOneDay`,
+  `nodeKeyExpired`, `nodeDeleted`, `policyUpdate`, `userCreated`, `userDeleted`, `userNeedsApproval`,
+  `userRoleUpdated`, `subnetIPForwardingNotEnabled`, `exitNodeIPForwardingNotEnabled`.
+
+  ## Response
+
+  Returns the created webhook object including its `endpointId` — save this as `endpoint_id` in your environment.

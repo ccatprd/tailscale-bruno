@@ -25,3 +25,17 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Create or Update Service
+
+  Creates a named service definition or replaces an existing one. Services are used to group ports
+  that a device exposes, making ACL rules more readable.
+
+  The `service_name` variable in the URL is the name of the service (alphanumeric and hyphens).
+
+  Port format: `"protocol:port"` — e.g. `"tcp:443"`, `"udp:53"`.
+
+  ## Response
+
+  Returns the created or updated service object with 200 OK.

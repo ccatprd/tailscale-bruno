@@ -24,3 +24,14 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Set DNS Nameservers
+
+  Replaces the list of global DNS nameservers for the tailnet. This is a full replace — existing servers not in the list are removed.
+
+  Send `"dns": []` to clear all custom nameservers and fall back to default DNS.
+
+  ## Response
+
+  Returns the updated nameserver list with 200 OK.

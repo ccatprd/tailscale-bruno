@@ -29,3 +29,19 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Set DNS Configuration
+
+  Sets the complete DNS configuration for the tailnet in a single request (nameservers, MagicDNS, search paths, and split DNS).
+
+  Use this instead of calling the individual DNS endpoints separately when you want to update everything at once.
+
+  ## splitDns
+
+  Maps domain suffixes to specific nameservers. Queries for those domains are sent only to the listed resolvers.
+  Example: `"corp.internal": ["10.0.0.1"]` routes internal DNS to your on-prem resolver.
+
+  ## Response
+
+  Returns the full updated DNS configuration with 200 OK.

@@ -24,3 +24,14 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Update Service Device Approval
+
+  Approves or revokes a device's permission to expose a specific service.
+
+  Both `service_name` and `device_id` variables must be set. Set `"approved": false` to revoke.
+
+  ## Response
+
+  Returns `null` (empty body) with 200 OK on success. This is expected — it does not mean the request failed.

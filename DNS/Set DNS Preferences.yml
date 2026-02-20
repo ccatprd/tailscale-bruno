@@ -24,3 +24,15 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Set DNS Preferences
+
+  Enables or disables MagicDNS for the tailnet.
+
+  MagicDNS lets devices reach each other by hostname (e.g. `my-laptop.tail1234.ts.net`) instead of IP.
+  Requires at least one nameserver to be set before MagicDNS can be enabled.
+
+  ## Response
+
+  Returns the updated DNS preferences with 200 OK.

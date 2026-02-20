@@ -15,3 +15,16 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Validate AWS Trust Policy
+
+  Checks that the IAM trust policy in your AWS account is correctly configured for Tailscale log streaming.
+
+  The `aws_external_id` variable must be set. Run "Create AWS External ID" first to get the value,
+  then set it in your environment.
+
+  ## Response
+
+  Returns `null` (empty body) with 200 OK if the trust policy is valid.
+  Returns an error with details if the configuration is incorrect.

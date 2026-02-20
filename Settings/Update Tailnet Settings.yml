@@ -31,3 +31,23 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Update Tailnet Settings
+
+  Updates global settings for the tailnet. Only include the fields you want to change — unspecified fields are left as-is.
+
+  ## Fields
+
+  - `devicesApprovalOn`: require admin approval before new devices can join
+  - `devicesAutoUpdatesOn`: automatically update Tailscale clients
+  - `devicesKeyDurationDays`: how many days before device keys expire (1–180)
+  - `usersApprovalOn`: require admin approval for new users
+  - `networkFlowLoggingOn`: enable network flow log streaming
+  - `regionalRoutingOn`: enable regional routing optimization
+  - `postureIdentityCollectionOn`: collect device identity data for posture checks
+  - `httpsEnabled`: enable HTTPS certificates via Let's Encrypt for MagicDNS names
+
+  ## Response
+
+  Returns the full updated settings object with 200 OK.

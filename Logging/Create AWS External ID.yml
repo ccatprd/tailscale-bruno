@@ -15,3 +15,15 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Create AWS External ID
+
+  Generates an AWS External ID used to set up cross-account IAM trust for Tailscale log streaming to S3.
+
+  This ID is used in the AWS trust policy to allow Tailscale to assume a role in your account.
+  After creating it, use "Validate AWS Trust Policy" to confirm the IAM setup is correct.
+
+  ## Response
+
+  Returns an object containing the `externalId` string.

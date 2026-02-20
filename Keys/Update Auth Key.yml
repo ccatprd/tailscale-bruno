@@ -35,3 +35,14 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Update Auth Key
+
+  Updates an existing auth key's capabilities or description. The `key_id` variable must be set.
+
+  Run "List Auth Keys" first to get a key ID, then set `key_id` in your environment.
+
+  ## Response
+
+  Returns the updated key object with 200 OK.

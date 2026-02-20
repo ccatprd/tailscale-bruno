@@ -24,3 +24,14 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Update Posture Integration
+
+  Updates credentials for an existing posture integration (e.g. rotate a CrowdStrike client secret).
+
+  The `integration_id` variable must be set. Run "List Posture Integrations" first to get the ID.
+
+  ## Response
+
+  Returns the updated integration object with 200 OK.

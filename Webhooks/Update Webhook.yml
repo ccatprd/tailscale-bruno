@@ -32,3 +32,14 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Update Webhook
+
+  Updates the subscription list for an existing webhook. Replaces all subscriptions with the provided list.
+
+  The `endpoint_id` variable must be set. Run "List Webhooks" first to get the ID.
+
+  ## Response
+
+  Returns the updated webhook object with 200 OK.

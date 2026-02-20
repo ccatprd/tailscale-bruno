@@ -24,3 +24,14 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Set DNS Search Paths
+
+  Sets the DNS search domains appended when resolving short hostnames on devices in the tailnet.
+
+  This is a full replace. Send `"searchPaths": []` to remove all search paths.
+
+  ## Response
+
+  Returns the updated search paths with 200 OK.

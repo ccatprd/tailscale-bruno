@@ -27,3 +27,15 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Set Device Routes
+
+  Sets the list of subnet routes that this device is allowed to advertise.
+
+  This controls which routes are *approved* — the device must also advertise them via its Tailscale client.
+  Sending an empty array (`"routes": []`) removes all approved routes.
+
+  ## Response
+
+  Returns `null` (empty body) with 200 OK on success. This is expected — it does not mean the request failed.

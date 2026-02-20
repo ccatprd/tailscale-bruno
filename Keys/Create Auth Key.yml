@@ -32,3 +32,20 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Create Auth Key
+
+  Creates an auth key used to register new devices to the tailnet.
+
+  ## Key options
+
+  - `reusable`: if true, the key can register multiple devices; if false, it's single-use
+  - `ephemeral`: if true, devices registered with this key are removed when they go offline
+  - `preauthorized`: if true, devices skip the approval step even when device approval is enabled
+  - `tags`: ACL tags to apply to devices registered with this key (must have matching tagOwners in ACL)
+  - `expirySeconds`: how long the key is valid (max 90 days = 7776000 seconds)
+
+  ## Response
+
+  Returns the created key object including the `key` field — this is the only time the key value is returned. Save it immediately.

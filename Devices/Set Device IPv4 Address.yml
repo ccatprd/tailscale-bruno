@@ -24,3 +24,15 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Set Device IPv4 Address
+
+  Reassigns the device's Tailscale IPv4 address within the `100.64.0.0/10` CGNAT range.
+
+  The address must be within the range and not already in use by another device. Use with care —
+  changing an IP breaks existing connections to that device until clients refresh their maps.
+
+  ## Response
+
+  Returns `null` (empty body) with 200 OK on success. This is expected — it does not mean the request failed.

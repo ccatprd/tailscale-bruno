@@ -15,3 +15,14 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Delete Service
+
+  Removes a service definition from the tailnet.
+
+  The `service_name` variable must be set. Run "List Services" first to see available service names.
+
+  ## Response
+
+  Returns `null` (empty body) with 200 OK on success. This is expected — it does not mean the request failed.

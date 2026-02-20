@@ -24,3 +24,15 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Accept Device Invite
+
+  Accepts a pending device invite, adding the shared device to the accepting user's tailnet.
+
+  The `device_invite_id` in the body is the invite token (not the numeric ID). This is the value
+  received in the invite email or from "List Device Invites".
+
+  ## Response
+
+  Returns the accepted invite object with 200 OK.

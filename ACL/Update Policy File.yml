@@ -35,3 +35,21 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Update Policy File
+
+  Replaces the live ACL policy for your entire tailnet. Changes take effect immediately for all devices.
+
+  **Use "Validate Policy File" to test your policy before applying it here.**
+
+  The example body is the default open policy (all traffic allowed). Replace with your actual policy.
+
+  ## ETag support
+
+  Add an `If-Match` header with the current policy ETag to prevent overwriting concurrent changes.
+  Get the ETag from the `ETag` response header when reading the current policy.
+
+  ## Response
+
+  Returns the full updated ACL policy object with 200 OK.

@@ -15,3 +15,14 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Restore User
+
+  Re-enables a previously suspended user, restoring their tailnet access.
+
+  Has no effect on users who were deleted — deletion is permanent.
+
+  ## Response
+
+  Returns `null` (empty body) with 200 OK on success. This is expected — it does not mean the request failed.

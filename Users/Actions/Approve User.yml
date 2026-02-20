@@ -15,3 +15,12 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Approve User
+
+  Approves a user who is pending approval to join the tailnet. Only relevant when user approval is enabled.
+
+  ## Response
+
+  Returns `null` (empty body) with 200 OK on success. This is expected — it does not mean the request failed.

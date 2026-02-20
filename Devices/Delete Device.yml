@@ -15,3 +15,14 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Delete Device
+
+  Permanently removes a device from the tailnet. The device will lose network access immediately.
+
+  The device can re-join by re-authenticating if it still has a valid auth key or SSO login.
+
+  ## Response
+
+  Returns `null` (empty body) with 200 OK on success. This is expected — it does not mean the request failed.

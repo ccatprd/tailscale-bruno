@@ -34,3 +34,17 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Batch Update Device Attributes
+
+  Sets posture attributes on multiple devices in a single request.
+
+  Attribute keys must use the `custom:` prefix followed by alphanumeric characters and underscores only.
+  No hyphens — e.g. `custom:compliance_status` is valid, `custom:compliance-status` is not.
+
+  The `expiry` field is optional. Omit it for a permanent attribute.
+
+  ## Response
+
+  Returns `null` (empty body) with 200 OK on success. This is expected — it does not mean the request failed.

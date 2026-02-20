@@ -24,3 +24,14 @@ settings:
   timeout: 0
   followRedirects: true
   maxRedirects: 5
+
+docs: |
+  # Set Device Name
+
+  Overrides the device's display name in the tailnet. The name must be a valid hostname (lowercase alphanumeric and hyphens).
+
+  This sets the machine name component only — the full MagicDNS name will be `<name>.<tailnet>.ts.net`.
+
+  ## Response
+
+  Returns `null` (empty body) with 200 OK on success. This is expected — it does not mean the request failed.
