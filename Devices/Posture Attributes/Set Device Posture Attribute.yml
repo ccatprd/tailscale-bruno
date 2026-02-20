@@ -16,9 +16,18 @@ http:
     type: json
     data: |
       {
-        "value": "string_or_number_or_boolean",
-        "expiry": "2025-12-01T05:23:30Z"
+        "value": "compliant",
+        "expiry": "2026-12-31T00:00:00Z"
       }
+
+docs: |
+  Sets a custom posture attribute on the device.
+
+  value: string, number, or boolean
+  expiry: ISO 8601 UTC timestamp — Tailscale removes the attribute automatically at this time.
+    Omit expiry entirely to make the attribute permanent.
+
+  To delete immediately instead of waiting for expiry, use: Delete Device Posture Attribute
 
 settings:
   encodeUrl: true
