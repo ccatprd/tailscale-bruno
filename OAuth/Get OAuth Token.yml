@@ -22,8 +22,20 @@ http:
         value: client_credentials
         enabled: true
       - name: scope
-        value: "devices:core:read"
+        value: "all"
         enabled: true
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |
+        const body = res.getBody();
+        if (body && body.access_token) {
+          bru.setEnvVar("access_token", body.access_token);
+          console.log("access_token updated from OAuth token response (expires in " + body.expires_in + "s)");
+        } else {
+          console.log("OAuth token request failed: " + JSON.stringify(body));
+        }
 
 settings:
   encodeUrl: true
@@ -32,17 +44,28 @@ settings:
   maxRedirects: 5
 
 docs: |
-  Exchanges OAuth client credentials for a short-lived access token.
+  # Get OAuth Token
 
-  Set oauth_client_id and oauth_client_secret in your environment first.
-  Create OAuth clients at: https://login.tailscale.com/admin/settings/oauth
+  Exchanges OAuth client credentials for a short-lived Bearer token, then auto-sets `access_token`
+  in your environment so all subsequent requests use it immediately.
 
-  Common scopes:
-    devices:core:read, devices:core, users:read, users,
-    keys:read, keys, dns:read, dns, acl:read, acl,
-    logs:read, logs:network:read, webhooks, tailnet:read
+  ## Flow
 
-  The returned access_token can be used as the Bearer token in all other requests.
-  Tokens are short-lived — re-run this request to get a fresh one.
+  1. Set `oauth_client_id` and `oauth_client_secret` in your environment
+  2. Run this request — `access_token` is updated automatically
+  3. Run any other request — it uses the new token via `{{access_token}}`
 
-  SUCCESS RESPONSE: returns { "access_token": "...", "token_type": "Bearer", "expires_in": 3600 }
+  Tokens expire in 3600 seconds (1 hour). Re-run this request to refresh.
+
+  ## Scope
+
+  Controls what the token can access. `all` grants full access.
+  For least-privilege, use specific scopes e.g. `logs:network:read`, `devices:core:read`.
+
+  Available scopes: devices:core:read, devices:core, users:read, users,
+  keys:read, keys, dns:read, dns, acl:read, acl,
+  logs:read, logs:network:read, webhooks, tailnet:read
+
+  ## Create OAuth clients
+
+  https://login.tailscale.com/admin/settings/oauth
