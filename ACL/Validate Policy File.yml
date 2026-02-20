@@ -43,14 +43,52 @@ settings:
   maxRedirects: 5
 
 docs: |
-  Validates a proposed ACL and optionally runs connectivity tests against it.
+  # Validate Policy File
 
-  The "tests" array lets you assert expected behavior BEFORE applying the ACL:
-    - "accept": list of host:port pairs that SHOULD be allowed
-    - "deny":   list of host:port pairs that SHOULD be blocked
+  Validates a proposed ACL policy WITHOUT applying it to your tailnet. Safe to run at any time.
 
-  SUCCESS: returns {} (empty object) — ACL is valid and all tests passed.
-  FAILURE: returns { "message": "test(s) failed", "data": [...] } with per-host errors.
+  ## How it works
 
-  The body is a proposed ACL — it is NOT applied to your tailnet.
-  Use Update Policy File to apply changes.
+  You send a complete ACL policy in the request body. Tailscale checks it for syntax errors
+  and optionally runs connectivity assertions (tests) against it to verify your rules behave
+  as intended.
+
+  ## The "tests" array
+
+  The tests block lets you write expectations about what your ACL should allow or deny.
+  Think of it like unit tests for your firewall rules.
+
+  Each test entry has:
+    - "src":    the source host or user making the connection
+    - "accept": ports/hosts that SHOULD be reachable from src (test fails if blocked)
+    - "deny":   ports/hosts that SHOULD be blocked from src (test fails if allowed)
+
+  ## Reading the example body
+
+  The ACL rule allows host1 → host2:22 (SSH) only.
+
+  The test intentionally checks the WRONG expectations to demonstrate a failure response:
+    - "accept": ["host2:443"]  → expects 443 to be allowed, but it's blocked → FAIL
+    - "deny":   ["host2:22"]   → expects 22 to be blocked, but it's allowed → FAIL
+
+  To see a passing response, swap accept and deny in the tests block.
+
+  ## Responses
+
+  SUCCESS (all tests pass):
+    {} — empty object with 200 OK
+
+  FAILURE (syntax error or test assertion failed):
+    {
+      "message": "test(s) failed",
+      "data": [
+        {
+          "user": "host1",
+          "errors": ["[acl test error]: address \"host2:443\": want: Accept, got: Drop"]
+        }
+      ]
+    }
+
+  ## Important
+
+  This endpoint does NOT modify your live ACL. Use "Update Policy File" to apply changes.
