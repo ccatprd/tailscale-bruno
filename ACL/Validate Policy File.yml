@@ -30,8 +30,8 @@ http:
         "tests": [
           {
             "src": "host1",
-            "accept": ["host2:22"],
-            "deny": ["host2:443"]
+            "accept": ["host2:443"],
+            "deny": ["host2:22"]
           }
         ]
       }
