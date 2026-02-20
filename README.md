@@ -196,7 +196,7 @@ Posture attributes are custom key-value pairs you can attach to devices — usef
 | `oauth_client_id` | OAuth client ID for token exchange | `k6MuYzEDs...` |
 | `oauth_client_secret` | OAuth client secret for token exchange | `tskey-client-...` |
 | `device_id` | Device ID — auto-set by List Devices, or set manually | `123456789` |
-| `attribute_key` | Posture attribute key (must start with `custom:`) | `custom:compliance-status` |
+| `attribute_key` | Posture attribute key (must start with `custom:`) | `custom:compliance_status` |
 | `user_id` | User ID for user-specific calls | |
 | `key_id` | Auth key ID | |
 | `endpoint_id` | Webhook endpoint ID | |
@@ -211,3 +211,78 @@ Posture attributes are custom key-value pairs you can attach to devices — usef
 ## API reference
 
 Full Tailscale API documentation: [https://tailscale.com/api](https://tailscale.com/api)
+
+---
+
+## Fetching logs
+
+Tailscale has two log types, both under the **Logging** folder:
+
+- **List Configuration Audit Logs** — admin actions (policy changes, user changes, etc.)
+- **List Network Flow Logs** — per-connection traffic records (requires network flow logging enabled in tailnet settings)
+
+Both endpoints require a `start` query parameter, so the collection uses a **before-request script** to automatically inject a time window on every run. No manual URL editing needed.
+
+### Default time windows
+
+| Request | Default window |
+|---|---|
+| List Network Flow Logs | Last **5 minutes** |
+| List Configuration Audit Logs | Last **30 minutes** |
+
+### Changing the window
+
+Open the request → click the **`>>`** icon in the tab bar (next to Vars) → select **Script** → **Pre Request**. You'll see:
+
+```js
+const now = new Date();
+const start = new Date(now.getTime() - 5 * 60 * 1000);
+```
+
+Change the multiplier to adjust the window. Examples:
+- Last 1 hour: `60 * 60 * 1000`
+- Last 24 hours: `24 * 60 * 60 * 1000`
+- Last 7 days: `7 * 24 * 60 * 60 * 1000`
+
+The script builds and sets the full URL directly so Bruno sends the correct timestamps every time.
+
+---
+
+## ACL policy validation
+
+The **ACL → Validate Policy File** request lets you test an ACL policy against inline test cases before applying it to your live tailnet.
+
+### How it works
+
+The request body contains both the policy and a `tests` array. Each test specifies a source (`src`) and lists which destinations should be `accept`ed or `deny`ed. Tailscale runs the policy against those tests and returns a pass/fail result — **without touching your live ACL**.
+
+```json
+{
+  "hosts": {
+    "host1": "100.117.222.1",
+    "host2": "100.117.222.2"
+  },
+  "acls": [
+    { "action": "accept", "src": ["host1"], "dst": ["host2:22"] }
+  ],
+  "tests": [
+    {
+      "src": "host1",
+      "accept": ["host2:443"],
+      "deny": ["host2:22"]
+    }
+  ]
+}
+```
+
+The example body in this collection is intentionally set up to **fail** its tests — so you can see exactly what a failure response looks like before writing your own tests.
+
+### Where to find the docs in Bruno
+
+Each request has a **Docs** tab with usage notes. If you don't see it, click the **`>>`** overflow arrow in the request tab bar (next to Vars) — the Docs tab is hidden there when the panel is narrow.
+
+### Running your own validation
+
+1. Replace the `hosts`, `acls`, and `tests` in the body with your actual policy
+2. Write `accept`/`deny` test cases that reflect your intended access rules
+3. Click **Send** — a passing response returns `{"message": "success"}`, a failing one lists exactly which test cases failed and why
