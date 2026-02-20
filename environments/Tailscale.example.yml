@@ -27,9 +27,9 @@ variables:
   - name: attribute_key
     value: ""
   - name: oauth_client_id
-    value: ""
+    value: your-client-id
   - name: oauth_client_secret
-    value: ""
+    value: tskey-client-REPLACE_ME
   - name: contact_type
     value: security
   - name: preview_for
