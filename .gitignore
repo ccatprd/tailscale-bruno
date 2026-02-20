@@ -2,6 +2,7 @@
 .env*
 environments/Tailscale.bru
 environments/Tailscale.json
+environments/Tailscale.yml
 
 # Dependencies
 node_modules

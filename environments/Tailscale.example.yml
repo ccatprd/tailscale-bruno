@@ -1,0 +1,38 @@
+name: Tailscale.example
+variables:
+  - name: base_url
+    value: https://api.tailscale.com/api/v2
+  - name: tailnet
+    value: your-tailnet.ts.net
+  - name: access_token
+    value: tskey-api-REPLACE_ME
+  - name: device_id
+    value: ""
+  - name: device_invite_id
+    value: ""
+  - name: user_id
+    value: ""
+  - name: user_invite_id
+    value: ""
+  - name: key_id
+    value: ""
+  - name: log_type
+    value: configuration
+  - name: service_name
+    value: ""
+  - name: integration_id
+    value: ""
+  - name: endpoint_id
+    value: ""
+  - name: attribute_key
+    value: ""
+  - name: oauth_client_id
+    value: ""
+  - name: oauth_client_secret
+    value: ""
+  - name: contact_type
+    value: security
+  - name: preview_for
+    value: ""
+  - name: aws_external_id
+    value: ""
