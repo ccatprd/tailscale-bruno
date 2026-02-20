@@ -24,8 +24,8 @@ runtime:
         // Default window: last 5 minutes
         const now = new Date();
         const start = new Date(now.getTime() - 5 * 60 * 1000);
-        bru.setVar("log_end", now.toISOString());
-        bru.setVar("log_start", start.toISOString());
+        bru.setEnvVar("log_end", now.toISOString());
+        bru.setEnvVar("log_start", start.toISOString());
 
 settings:
   encodeUrl: true
