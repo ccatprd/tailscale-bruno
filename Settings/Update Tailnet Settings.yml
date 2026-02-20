@@ -1,0 +1,33 @@
+info:
+  name: Update Tailnet Settings
+  type: http
+  seq: 2
+
+http:
+  method: PATCH
+  url: "{{base_url}}/tailnet/{{tailnet}}/settings"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "devicesApprovalOn": false,
+        "devicesAutoUpdatesOn": false,
+        "devicesKeyDurationDays": 180,
+        "usersApprovalOn": false,
+        "networkFlowLoggingOn": false,
+        "regionalRoutingOn": false,
+        "postureIdentityCollectionOn": false,
+        "httpsEnabled": false
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

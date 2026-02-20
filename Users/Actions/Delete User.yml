@@ -1,0 +1,17 @@
+info:
+  name: Delete User
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}/users/{{user_id}}/delete"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

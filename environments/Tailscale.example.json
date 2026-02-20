@@ -60,6 +60,11 @@
       "name": "endpoint_id",
       "value": "",
       "enabled": true
+    },
+    {
+      "name": "attribute_key",
+      "value": "",
+      "enabled": true
     }
   ]
 }

@@ -1,0 +1,29 @@
+info:
+  name: Set Device Tags
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{base_url}}/device/{{device_id}}/tags"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "tags": [
+          "tag:foo",
+          "tag:bar"
+        ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

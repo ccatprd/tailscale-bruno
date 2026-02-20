@@ -1,0 +1,29 @@
+info:
+  name: Set Device Routes
+  type: http
+  seq: 8
+
+http:
+  method: POST
+  url: "{{base_url}}/device/{{device_id}}/routes"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "routes": [
+          "10.0.0.0/16",
+          "192.168.1.0/24"
+        ]
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

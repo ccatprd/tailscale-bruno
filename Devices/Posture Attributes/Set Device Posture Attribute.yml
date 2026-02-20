@@ -1,0 +1,27 @@
+info:
+  name: Set Device Posture Attribute
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}/device/{{device_id}}/attributes/{{attribute_key}}"
+  auth:
+    type: bearer
+    token: "{{access_token}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |
+      {
+        "value": "string_or_number_or_boolean",
+        "expiry": "2025-12-01T05:23:30Z"
+      }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
